@@ -1,0 +1,24 @@
+apply plugin: plugs.android.lib
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+    }
+
+    lintOptions {
+        abortOnError configs.abortOnError
+    }
+
+    compileOptions {
+        sourceCompatibility versions.java
+        targetCompatibility versions.java
+    }
+}
+
+dependencies {
+    compileOnly deps.support.annotations
+}

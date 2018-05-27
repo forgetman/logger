@@ -1,2 +1,2 @@
 # logger
-log
+log便捷打印
