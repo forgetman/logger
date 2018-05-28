@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    compileOnly deps.support.annotations
+    implementation deps.support.annotations
 }
 
 // build a jar with source files
