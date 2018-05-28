@@ -22,3 +22,6 @@ android {
 dependencies {
     compileOnly deps.support.annotations
 }
+
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.forgetman'
