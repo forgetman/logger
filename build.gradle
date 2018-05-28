@@ -13,9 +13,9 @@ allprojects {
     addRepos(repositories)
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
 
 subprojects {
     project.configurations.all {

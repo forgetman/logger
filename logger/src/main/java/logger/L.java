@@ -115,7 +115,8 @@ public final class L {
         return targetStackTrace;
     }
 
-    private static String content(String msg, StackTraceElement element) {
+    private static String content(String msg, @Nullable StackTraceElement element) {
+        assert element != null;
         return make(msg,
                 "(",
                 element.getFileName(),
@@ -133,7 +134,7 @@ public final class L {
     }
 
     private static String make(String... param) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (String s : param) {
             buffer.append(s);
         }
