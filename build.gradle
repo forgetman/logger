@@ -5,7 +5,7 @@ buildscript {
     dependencies {
         classpath deps.path.gradlePlugin
         classpath deps.path.kotlinPlugin
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 
