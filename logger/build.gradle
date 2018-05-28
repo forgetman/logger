@@ -33,5 +33,4 @@ android {
 
 dependencies {
     compileOnly deps.support.annotations
-//    implementation 'com.github.forgetman:test_jitpack:1.0.4'
 }

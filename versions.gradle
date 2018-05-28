@@ -5,19 +5,8 @@ ext.versions = [
 
         androidPlugin : '3.1.2',
 
-        versionCode   : 100,
-        versionName   : '1.0',
-
         java          : JavaVersion.VERSION_1_8,
         supportLibrary: '27.1.1', // 支持生命周期架构组件 since 26.1
-
-        kotlin        : '1.2.41',
-
-        rx            : [
-                java      : '2.1.14-RC1',
-                android   : '2.0.2',
-                kotlin    : '2.2.0',
-        ],
 ]
 
 ext.configs = [
@@ -26,40 +15,19 @@ ext.configs = [
 ]
 
 ext.plugs = [
-        android : [
-                app   : 'com.android.application',
-                lib   : 'com.android.library',
+        android: [
+                app: 'com.android.application',
+                lib: 'com.android.library',
         ],
-        kotlin  : [
-                kotlin    : 'kotlin',
-                android   : 'kotlin-android',
-                kapt      : 'kotlin-kapt',
-        ],
-        java    : 'java-library',
 ]
 
 ext.deps = [
-        path       : [
-                gradlePlugin    : "com.android.tools.build:gradle:$versions.androidPlugin",
-                kotlinPlugin    : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+        path   : [
+                gradlePlugin: "com.android.tools.build:gradle:$versions.androidPlugin",
+                mavenPlugin : 'com.github.dcendents:android-maven-gradle-plugin:2.1',
         ],
-        support    : [
-                compat          : "com.android.support:support-compat:$versions.supportLibrary",
-                appcompat       : "com.android.support:appcompat-v7:$versions.supportLibrary",
+        support: [
                 annotations     : "com.android.support:support-annotations:$versions.supportLibrary",
-                v4              : "com.android.support:support-v4:$versions.supportLibrary",
-                constraintLayout: 'com.android.support.constraint:constraint-layout:1.1.0',
-                test            : [
-                        runner  : 'com.android.support.test:runner:1.0.1',
-                        espresso: 'com.android.support.test.espresso:espresso-core:3.0.1',
-                        junit4  : 'junit:junit:4.12',
-                ],
-                dex             : 'com.android.support:multidex:1.0.2',
-        ],
-        rx         : [
-                java     : "io.reactivex.rxjava2:rxjava:$versions.rx.java",
-                android  : "io.reactivex.rxjava2:rxandroid:$versions.rx.android", // https://github.com/ReactiveX/RxAndroid
-                kotlin   : "io.reactivex.rxjava2:rxkotlin:$versions.rx.kotlin",
         ],
 ]
 
