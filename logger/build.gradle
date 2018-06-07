@@ -1,5 +1,5 @@
 apply plugin: plugs.android.lib
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: plugs.maven
 
 group='com.github.forgetman'
 
@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk
-        versionCode 1
-        versionName "1.0"
+        versionCode 105
+        versionName "1.0.5"
     }
 
     lintOptions {

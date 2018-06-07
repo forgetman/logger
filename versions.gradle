@@ -19,6 +19,7 @@ ext.plugs = [
                 app: 'com.android.application',
                 lib: 'com.android.library',
         ],
+        maven  : 'com.github.dcendents.android-maven',
 ]
 
 ext.deps = [
@@ -27,7 +28,7 @@ ext.deps = [
                 mavenPlugin : 'com.github.dcendents:android-maven-gradle-plugin:2.1',
         ],
         support: [
-                annotations     : "com.android.support:support-annotations:$versions.supportLibrary",
+                annotations: "com.android.support:support-annotations:$versions.supportLibrary",
         ],
 ]
 
@@ -35,7 +36,6 @@ static def addRepos(RepositoryHandler handler) {
     handler.google()
     handler.jcenter()
     handler.mavenCentral()
-    handler.maven { url 'https://jitpack.io' }
 }
 
 ext.addRepos = this.&addRepos
