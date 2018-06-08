@@ -31,12 +31,16 @@ public final class L {
     // JSON的缩进量
     private static final int JSON_INDENT = 4;
 
-    private static boolean mIsDebug = BuildConfig.DEBUG;
+    private static boolean mIsDebug = true;
 
     //Android系统的单条日志打印长度是固定的4*1024个字符长度。
     private static final int CHUNK_SIZE = 4000;
 
     private L() {
+    }
+
+    public static void setDebug(boolean debug) {
+        mIsDebug = debug;
     }
 
     private static void log(int logType, @Nullable String onceOnlyTag, @Nullable String message) {
