@@ -11,8 +11,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 
-@SuppressWarnings("unused")
+@SuppressWarnings("ALL")
 public final class L {
+    private static final String TAG_WWW = "www";
     private static final String TOP_LEFT_CORNER = "";
     private static final char BOTTOM_LEFT_CORNER = '└';
     private static final char HORIZONTAL_LINE = '|';
@@ -63,7 +64,6 @@ public final class L {
         }
         logBottomBorder(logType, tag);
     }
-
 
     @Nullable
     private static String formatTag(@Nullable String tag) {
@@ -209,7 +209,7 @@ public final class L {
     }
 
     private static String getTag(@Nullable StackTraceElement element) {
-        String result = null;
+        String result;
         if (element != null) {
             result = element.getClassName();
             int lastIndex = result.lastIndexOf(".");
@@ -295,7 +295,6 @@ public final class L {
         doLog(ERROR, tag, msg);
     }
 
-
     public static Builder concat() {
         return new Builder();
     }
@@ -368,9 +367,20 @@ public final class L {
             mStringBuilder.append(msg).append("\n");
             return this;
         }
+
         public void build() {
             doLog(type, tag, mStringBuilder.toString());
         }
     }
 
+    /**
+     * quick tag with "www"
+     *
+     * @param msg
+     */
+    public static void www(String msg) {
+        if (mIsDebug) {
+            Log.d(TAG_WWW, content(msg, getTraceElement()));
+        }
+    }
 }
