@@ -13,12 +13,10 @@ import org.json.JSONTokener;
 
 @SuppressWarnings("unused")
 public final class L {
-    private static final String TAG_WWW = "www";
-
     private static final String TOP_LEFT_CORNER = "";
     private static final char BOTTOM_LEFT_CORNER = '└';
     private static final char HORIZONTAL_LINE = '|';
-    private static final String DOUBLE_DIVIDER = "────────────────────────────────────────────────────────";
+    private static final String DOUBLE_DIVIDER = "──────────────────────────────";
     private static final String TOP_BORDER = DOUBLE_DIVIDER;
     private static final String BOTTOM_BORDER = BOTTOM_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
 
@@ -100,7 +98,7 @@ public final class L {
                 Log.e(tag, line);
                 break;
             default:
-                Log.d(tag, TOP_BORDER);
+                Log.d(tag, line);
                 break;
         }
 
@@ -155,11 +153,6 @@ public final class L {
         }
     }
 
-    public static void www(String msg) {
-        if (mIsDebug) {
-            Log.d(TAG_WWW, content(msg, getTraceElement()));
-        }
-    }
 
     private static void json(int logType, String tag, String msg) {
         if (!mIsDebug) {
@@ -300,6 +293,84 @@ public final class L {
 
     public static void e(@Nullable String tag, String msg) {
         doLog(ERROR, tag, msg);
+    }
+
+
+    public static Builder concat() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private StringBuilder mStringBuilder;
+        private int type;
+        private String tag;
+
+        public Builder() {
+            mStringBuilder = new StringBuilder();
+        }
+
+        public Builder d() {
+            this.type = DEBUG;
+            return this;
+        }
+
+        public Builder d(String tag) {
+            this.type = DEBUG;
+            this.tag = tag;
+            return this;
+        }
+
+        public Builder v() {
+            this.type = VERBOSE;
+            return this;
+        }
+
+        public Builder v(String tag) {
+            this.type = DEBUG;
+            this.tag = tag;
+            return this;
+        }
+
+        public Builder i() {
+            this.type = INFO;
+            return this;
+        }
+
+        public Builder i(String tag) {
+            this.type = INFO;
+            this.tag = tag;
+            return this;
+        }
+
+        public Builder e() {
+            this.type = ERROR;
+            return this;
+        }
+
+        public Builder e(String tag) {
+            this.type = ERROR;
+            this.tag = tag;
+            return this;
+        }
+
+        public Builder w() {
+            this.type = WARN;
+            return this;
+        }
+
+        public Builder w(String tag) {
+            this.type = WARN;
+            this.tag = tag;
+            return this;
+        }
+
+        public Builder append(String msg) {
+            mStringBuilder.append(msg).append("\n");
+            return this;
+        }
+        public void build() {
+            doLog(type, tag, mStringBuilder.toString());
+        }
     }
 
 }
