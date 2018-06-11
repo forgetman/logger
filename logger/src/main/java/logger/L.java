@@ -295,8 +295,8 @@ public final class L {
         doLog(ERROR, tag, msg);
     }
 
-    public static Builder concat() {
-        return new Builder();
+    public static Builder merge() {
+        return new Builder(getTag(getTraceElement()));
     }
 
     public static class Builder {
@@ -304,7 +304,8 @@ public final class L {
         private int type;
         private String tag;
 
-        public Builder() {
+        private Builder(String tag) {
+            this.tag = tag;
             mStringBuilder = new StringBuilder();
         }
 
@@ -368,7 +369,7 @@ public final class L {
             return this;
         }
 
-        public void build() {
+        public void end() {
             doLog(type, tag, mStringBuilder.toString());
         }
     }

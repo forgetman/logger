@@ -1,8 +1,12 @@
 # logger [![](https://jitpack.io/v/forgetman/logger.svg)](https://jitpack.io/#forgetman/logger)
-log便捷打印
+it is a log printer that print the log in style
 
 Update
 ------
++ v1.0.7:
+```text
+add method 'merge()': merge several logs  
+```
 + v1.0.6:
 ```text
 加入更改debug状态的设置
