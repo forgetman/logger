@@ -19,6 +19,15 @@ add method 'merge()': merge several logs
 
 Download
 --------
++ Step 1. Add it in your root build.gradle at the end of repositories
+```groovy
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
++ Step 2. Add the dependency
 ```groovy
 dependencies {
   implementation 'com.github.forgetman:logger:1.0.7'
