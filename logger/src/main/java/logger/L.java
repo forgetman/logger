@@ -14,11 +14,11 @@ import org.json.JSONTokener;
 @SuppressWarnings("ALL")
 public final class L {
     private static final String TAG_WWW = "www";
-    private static final String TOP_LEFT_CORNER = "";
+    private static final String TOP_LEFT_CORNER = "┌";
     private static final char BOTTOM_LEFT_CORNER = '└';
     private static final char HORIZONTAL_LINE = '|';
     private static final String DOUBLE_DIVIDER = "──────────────────────────────";
-    private static final String TOP_BORDER = DOUBLE_DIVIDER;
+    private static final String TOP_BORDER = TOP_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
     private static final String BOTTOM_BORDER = BOTTOM_LEFT_CORNER + DOUBLE_DIVIDER + DOUBLE_DIVIDER;
 
     private static final int VERBOSE = 1;
@@ -198,12 +198,12 @@ public final class L {
         if (element == null) {
             return make(msg);
         } else {
-            return make(msg,
+            return make(
                     "(",
                     element.getFileName(),
                     ":",
                     String.valueOf(element.getLineNumber()),
-                    ")"
+                    ")", "\n", msg
             );
         }
     }
@@ -383,5 +383,27 @@ public final class L {
         if (mIsDebug) {
             Log.d(TAG_WWW, content(msg, getTraceElement()));
         }
+    }
+
+    /**
+     * thread msg
+     */
+    public static void trace() {
+        StackTraceElement traceElement = getTraceElement();
+        StringBuffer stringBuffer = new StringBuffer();
+        Thread thread = Thread.currentThread();
+        String threadMsg = stringBuffer.append("Process_id:")
+                .append(android.os.Process.myPid())
+                .append("\n")
+                .append("Thread_name:")
+                .append(thread.getName())
+                .append("\n")
+                .append("Thread_id:")
+                .append(thread.getId())
+                .append("\n")
+//                .append(fromClass(traceElement))
+                .toString();
+
+        d(threadMsg);
     }
 }
