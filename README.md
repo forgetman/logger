@@ -21,7 +21,7 @@ Download
 --------
 ```groovy
 dependencies {
-  implementation ''
+  implementation 'com.github.forgetman:logger:1.0.7'
 }
 ```
 How to use
