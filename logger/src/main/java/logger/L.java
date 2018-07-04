@@ -14,6 +14,7 @@ import org.json.JSONTokener;
 @SuppressWarnings("ALL")
 public final class L {
     private static final String TAG_WWW = "www";
+    private static final String L_CLASS_NAME = L.class.getName();
     private static final String TOP_LEFT_CORNER = "┌";
     private static final char BOTTOM_LEFT_CORNER = '└';
     private static final char HORIZONTAL_LINE = '|';
@@ -32,7 +33,7 @@ public final class L {
 
     private static boolean mIsDebug = true;
 
-    //Android系统的单条日志打印长度是固定的4*1024个字符长度。
+    //Android系统的单条日志打印长度是固定的4*1024个字符长度,截取4000个字符长度作为分段打印的最大长度。
     private static final int CHUNK_SIZE = 4000;
 
     private L() {
@@ -49,19 +50,19 @@ public final class L {
 
         String tag = formatTag(onceOnlyTag);
 
-        logTopBorder(tag);
+        logTopBorder(logType, tag);
 
         byte[] bytes = message.getBytes();
         int length = bytes.length;
         if (length <= CHUNK_SIZE) {
             logContent(logType, tag, message);
-            logBottomBorder(logType, tag);
-            return;
+        } else {
+            for (int i = 0; i < length; i += CHUNK_SIZE) {
+                int count = Math.min(length - i, CHUNK_SIZE);
+                logContent(logType, tag, new String(bytes, i, count));
+            }
         }
-        for (int i = 0; i < length; i += CHUNK_SIZE) {
-            int count = Math.min(length - i, CHUNK_SIZE);
-            logContent(logType, tag, new String(bytes, i, count));
-        }
+
         logBottomBorder(logType, tag);
     }
 
@@ -73,8 +74,8 @@ public final class L {
         return getTag(getTraceElement());
     }
 
-    private static void logTopBorder(@Nullable String tag) {
-        debug(tag, TOP_BORDER);
+    private static void logTopBorder(int logType, @Nullable String tag) {
+        topType(logType,tag);
     }
 
     public static void type(int logType, String tag, String line) {
@@ -103,6 +104,34 @@ public final class L {
         }
 
     }
+
+    private static void topType(int logType, String tag) {
+        if (!mIsDebug) {
+            return;
+        }
+        switch (logType) {
+            case VERBOSE:
+                Log.v(tag, content(TOP_BORDER, getTraceElement()));
+                break;
+            case DEBUG:
+                debug(tag, TOP_BORDER);
+                break;
+            case INFO:
+                Log.i(tag, content(TOP_BORDER, getTraceElement()));
+                break;
+            case WARN:
+                Log.w(tag, content(TOP_BORDER, getTraceElement()));
+                break;
+            case ERROR:
+                Log.e(tag, content(TOP_BORDER, getTraceElement()));
+                break;
+            default:
+                debug(tag, TOP_BORDER);
+                break;
+        }
+
+    }
+
 
     private static void logBottomBorder(int logType, @Nullable String tag) {
         type(logType, tag, BOTTOM_BORDER);
@@ -180,18 +209,16 @@ public final class L {
     @Nullable
     private static StackTraceElement getTraceElement() {
         // find the target invoked method
-        StackTraceElement element = null;
         boolean shouldTrace = false;
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         for (StackTraceElement stackTraceElement : stackTrace) {
-            boolean isLogMethod = stackTraceElement.getClassName().equals(L.class.getName());
+            boolean isLogMethod = stackTraceElement.getClassName().equals(L_CLASS_NAME);
             if (shouldTrace && !isLogMethod) {
-                element = stackTraceElement;
-                break;
+                return stackTraceElement;
             }
             shouldTrace = isLogMethod;
         }
-        return element;
+        return null;
     }
 
     private static String content(String msg, @Nullable StackTraceElement element) {
