@@ -75,7 +75,7 @@ public final class L {
     }
 
     private static void logTopBorder(int logType, @Nullable String tag) {
-        topType(logType,tag);
+        topType(logType, tag);
     }
 
     public static void type(int logType, String tag, String line) {
@@ -238,9 +238,13 @@ public final class L {
     private static String getTag(@Nullable StackTraceElement element) {
         String result;
         if (element != null) {
-            result = element.getClassName();
+//            result = element.getClassName();
+//            int lastIndex = result.lastIndexOf(".");
+//            result = result.substring(lastIndex + 1, result.length());
+
+            result = element.getFileName();
             int lastIndex = result.lastIndexOf(".");
-            result = result.substring(lastIndex + 1, result.length());
+            result = result.substring(0, lastIndex);
         } else {
             result = "temp_tag";
         }
