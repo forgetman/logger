@@ -2,8 +2,6 @@ package logger_test.app;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.View.OnClickListener;
 
 import logger.L;
 
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        L.merge().d().append("logMessage1").append("logMessage2").append("logMessage3").end();
 
-
+//          L.d("onCreate", null);
     }
 
 

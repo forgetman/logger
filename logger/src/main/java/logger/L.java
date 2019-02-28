@@ -277,6 +277,7 @@ public final class L {
 
     private static void doLog(int logType, @Nullable String tag, String message) {
         if (TextUtils.isEmpty(message)) {
+            L.log(logType, tag, "The log content is null or empty！");
             return;
         }
         if (isJSONValid(message)) {
