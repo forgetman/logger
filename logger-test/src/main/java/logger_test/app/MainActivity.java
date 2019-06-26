@@ -14,10 +14,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        L.d("-------","onCreate: fsdfsdfsdf");
+//        L.i("-------","onCreate: fsdfsdfsdf");
+//        L.e("-------","onCreate: fsdfsdfsdf");
+//        L.w("-------","onCreate: fsdfsdfsdf");
 //        L.www("onCreate:  = " + "?sss");
-
+//
 //        L.merge().d().append("logMessage1").append("logMessage2").append("logMessage3").end();
-
+//
 //          L.d("onCreate", null);
     }
 

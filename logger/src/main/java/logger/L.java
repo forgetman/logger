@@ -50,6 +50,9 @@ public final class L {
 
         String tag = formatTag(onceOnlyTag);
 
+        //日志出处信息
+        stackTraceElementInfo(logType, tag);
+
         logTopBorder(logType, tag);
 
         byte[] bytes = message.getBytes();
@@ -75,7 +78,7 @@ public final class L {
     }
 
     private static void logTopBorder(int logType, @Nullable String tag) {
-        topType(logType, tag);
+        type(logType, tag, TOP_BORDER);
     }
 
     public static void type(int logType, String tag, String line) {
@@ -105,28 +108,28 @@ public final class L {
 
     }
 
-    private static void topType(int logType, String tag) {
+    private static void stackTraceElementInfo(int logType, String tag) {
         if (!mIsDebug) {
             return;
         }
         switch (logType) {
             case VERBOSE:
-                Log.v(tag, content(TOP_BORDER, getTraceElement()));
+                Log.v(tag, content("", getTraceElement()));
                 break;
             case DEBUG:
-                debug(tag, TOP_BORDER);
+                debug(tag, "");
                 break;
             case INFO:
-                Log.i(tag, content(TOP_BORDER, getTraceElement()));
+                Log.i(tag, content("", getTraceElement()));
                 break;
             case WARN:
-                Log.w(tag, content(TOP_BORDER, getTraceElement()));
+                Log.w(tag, content("", getTraceElement()));
                 break;
             case ERROR:
-                Log.e(tag, content(TOP_BORDER, getTraceElement()));
+                Log.e(tag, content("", getTraceElement()));
                 break;
             default:
-                debug(tag, TOP_BORDER);
+                debug(tag, "");
                 break;
         }
 
@@ -230,7 +233,7 @@ public final class L {
                     element.getFileName(),
                     ":",
                     String.valueOf(element.getLineNumber()),
-                    ")", "\n", msg
+                    ")", " ", msg
             );
         }
     }
