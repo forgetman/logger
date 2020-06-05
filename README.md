@@ -3,9 +3,18 @@ it is a log printer that print the log in style
 
 Update
 ------
++ v1.2.0:
+```text
+升级到androidx
+```
++ v1.1.2:
+```text
+修复json打印的错误
+```
+
 + v1.0.7:
 ```text
-add method 'merge()': merge several logs  
+加入方法 merge(): 合并多条log
 ```
 + v1.0.6:
 ```text
