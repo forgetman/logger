@@ -1,4 +1,5 @@
 apply plugin: plugs.android.lib
+apply plugin: plugs.kotlin.android
 apply plugin: plugs.maven
 
 group='com.github.forgetman'
@@ -10,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk
-        versionCode 120
-        versionName "1.2.0"
+        versionCode 130
+        versionName "2.0.0"
     }
 
     lintOptions {
@@ -33,4 +34,5 @@ android {
 
 dependencies {
     compileOnly deps.androidx.annotations
+    compileOnly deps.kotlin.runtime
 }

@@ -1,11 +1,12 @@
 ext.versions = [
         minSdk       : 21,
-        compileSdk   : 29,
-        buildTools   : '29.0.2',
+        compileSdk   : 30,
+        buildTools   : '30.0.0',
 
         androidPlugin: '4.0.0',
 
         java         : JavaVersion.VERSION_1_8,
+        kotlin: '1.3.72',
 ]
 
 ext.configs = [
@@ -19,16 +20,24 @@ ext.plugs = [
                 lib: 'com.android.library',
         ],
         maven  : 'com.github.dcendents.android-maven',
+        kotlin: [
+                kotlin    : 'kotlin',
+                android   : 'kotlin-android',
+        ],
 ]
 
 ext.deps = [
         path    : [
                 gradlePlugin: "com.android.tools.build:gradle:$versions.androidPlugin",
                 mavenPlugin : 'com.github.dcendents:android-maven-gradle-plugin:2.1',
+                kotlinPlugin    : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
         ],
         androidx: [
                 annotations: "androidx.annotation:annotation:1.1.0",
-        ]
+        ],
+        kotlin: [
+                runtime   : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin",
+        ],
 ]
 
 static def addRepos(RepositoryHandler handler) {

@@ -3,27 +3,24 @@ it is a log printer that print the log in style
 
 Update
 ------
++ v2.0.0:
+```text
+1. use kotlin
+2. remove merge(), use compose() instead
+```
+
 + v1.2.0:
 ```text
-升级到androidx
+update to androidx
 ```
 + v1.1.2:
 ```text
-修复json打印的错误
+fix bug of json
 ```
 
 + v1.0.7:
 ```text
-加入方法 merge(): 合并多条log
-```
-+ v1.0.6:
-```text
-加入更改debug状态的设置
-```
-+ v1.0.5: 
-```text
-1. 加入json完整打印(不会截断)
-2. 加入每条log头尾的间隔符以作醒目区分
+add merge(): compose multiply log
 ```
 
 Download
@@ -39,22 +36,26 @@ allprojects {
 + Step 2. Add the dependency
 ```groovy
 dependencies {
-  implementation 'com.github.forgetman:logger:1.0.7'
+  implementation 'com.github.forgetman:logger:last_version'
 }
 ```
 How to use
 ----------
-```java
-public class Test{
+```kotlin
+class Test {
     
-    private void fun(){
+    fun test() {
         L.d("logMessage");
         
         //You can also add tag
         L.d("TAG","logMessage with TAG");
         
         //More output
-        L.merge().d().append("logMessage1").append("logMessage2").append("logMessage3").end();
+        L.compose {
+            append("LogMessage1")
+            append("LogMessage2")
+            append("LogMessage3")
+        }.d()
         
         //Other information,such as threads, processes, etc
         L.trace(); 

@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "logger_test.app"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
@@ -27,4 +28,9 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta6"
 
     implementation project(":logger")
+
+    implementation deps.kotlin.runtime
+}
+repositories {
+    mavenCentral()
 }
