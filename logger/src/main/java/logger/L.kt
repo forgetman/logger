@@ -121,15 +121,18 @@ object L {
         }
     }
 
+    @JvmStatic
     fun e(tr: Throwable) {
         val element = traceElement
         e(getTag(element), null, tr, element)
     }
 
+    @JvmStatic
     fun e(tag: String, tr: Throwable) {
         e(tag, null, tr)
     }
 
+    @JvmStatic
     fun e(tag: String, msg: String?, tr: Throwable) {
         e(tag, msg, tr, traceElement)
     }
